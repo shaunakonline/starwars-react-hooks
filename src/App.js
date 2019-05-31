@@ -1,7 +1,7 @@
    
 import React, {Component} from 'react'; 
 import './App.css';
-import CharacterList from './components/CharacterList'
+import CharacterList from './components/character/CharacterList'
 import StarshipGrid from './components/starship/StarshipGrid';
 
 class App extends Component {
@@ -42,6 +42,7 @@ class App extends Component {
       <div className="container">
         <br /> 
         <br /> 
+        <div className="App">
         <CharacterList
           side = {this.state.side}
           onCharacterSelector = {this.handleCharacterSelector}
@@ -54,6 +55,7 @@ class App extends Component {
         <StarshipGrid
             ships= {this.state.allShips}>
         </StarshipGrid>
+        </div>
        </div>
     );
   }
