@@ -41,7 +41,7 @@ class CharacterList extends Component {
       content = (
         <select
           onChange={this.props.onCharacterSelector}
-          value={this.props.selectedCharactor}
+          value={this.props.selectedCharactorId}
           className={this.props.side}
         >
           {this.state.characters.map(char => (

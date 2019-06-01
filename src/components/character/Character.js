@@ -1,17 +1,29 @@
-import React from 'react';
+import React, { Component } from 'react';
+import CharacterDetail from './CharacterDetail';
 
-const Character = (props) => {
+class Character extends Component {
+    state = { selectedCharacter:{}, isLoading: false};
+    component
 
-    const {name, gender, height, hair} = props;
+    render(){
+        let content = <p> loading .....</p>;
+        if(!this.state.isLoading && this.state.selectedCharacter){
+          content =  <div>
+                <CharacterDetail
+                    name={this.state.name}
+                    gender={this.state.gender}
+                    height={this.state.height}
+                    hair={this.state.hair}
+                />
+            </div>
 
-    return(
-        <div>
-            <h1>{ name }</h1>
-            <p>{ gender }</p>
-            <p>{ height }</p>
-            <p>{ hair }</p>
-        </div>
-    ); 
+        }else if(!this.state.isLoading && this.state.selectedCharacter){
+            content = <p> Failed to fetch Character</p>
+        }
+
+        return content;
+    }
 }
+ 
 
 export default Character;

@@ -1,7 +1,8 @@
    
 import React, {Component} from 'react'; 
 import './App.css';
-import CharacterList from './components/character/CharacterList'
+import CharacterList from './components/character/CharacterList';
+import Character from './components/character/Character';
 import StarshipGrid from './components/starship/StarshipGrid';
 
 class App extends Component {
@@ -46,7 +47,10 @@ class App extends Component {
         <CharacterList
           side = {this.state.side}
           onCharacterSelector = {this.handleCharacterSelector}
-          selectedCharactor = {this.state.characterId}
+          selectedCharactorId = {this.state.characterId}
+        />
+        <Character
+          selectedCharactorId = {this.state.characterId}
         />
         <button className="waves-effect waves-light btn-small" onClick={this.handleSide.bind(this, 'light')}> Light Side </button>
         <button className="waves-effect waves-light btn-small" onClick={this.handleSide.bind(this, 'dark')}> Dark Side </button>
