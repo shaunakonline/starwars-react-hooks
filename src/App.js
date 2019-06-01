@@ -56,9 +56,9 @@ class App extends Component {
         <button className="waves-effect waves-light btn-small" onClick={this.handleSide.bind(this, 'dark')}> Dark Side </button>
         <button className="waves-effect waves-light btn-small" onClick={this.handleStarshipSelector.bind(this, 9)}>Starship 9 </button>
 
-        <StarshipGrid
+        {/* <StarshipGrid
             ships= {this.state.allShips}>
-        </StarshipGrid>
+        </StarshipGrid> */}
         </div>
        </div>
     );
