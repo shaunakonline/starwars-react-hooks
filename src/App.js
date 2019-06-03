@@ -1,68 +1,89 @@
    
-import React, {Component} from 'react'; 
+import React, {useState, useEffect} from 'react'; 
 import './App.css';
 import CharacterList from './components/character/CharacterList';
 import Character from './components/character/Character';
 import StarshipGrid from './components/starship/StarshipGrid';
 
-class App extends Component {
-  state = {
-    test: 0,
-    side: 'light',
-    starshipId: 1,
-    characterId: 1,
-    allShips: []
-  };
+const App = (props) => {
+  const [side, setSide] = useState('light');
+  const [starshipId, setStarshipId] = useState('1');
+  const [characterId, setCharacterId] = useState('1');
+  const [allShips, setAllShips]= useState([]);
 
-  handleSide = (side) => {
-    this.setState({side: side}); // can be written as this.setState({side})
+  // state = {
+  //   side: 'light',
+  //   starshipId: 1,
+  //   characterId: 1,
+  //   allShips: []
+  // };
+
+ const handleSide = (side) => {
+    setSide(side); // can be written as this.setState({side})
   }
 
-  handleStarshipSelector = (shipId) => {
-    this.setState({starshipId: shipId});
+ const handleStarshipSelector = (shipId) => {
+    setStarshipId(shipId);
   }
-  handleCharacterSelector = (e) => {
+ const handleCharacterSelector = (e) => {
     const characterId = e.target.value;
-    this.setState({characterId: characterId});
+    setCharacterId(characterId);
   }
-  componentDidMount(){
+
+  useEffect(()=>{
+    console.log('App useEffect componentDidMount()');
     fetch('https://swapi.co/api/starships')
-    .then((res)=>{
+    .then((res) => {
       return res.json();
+    })
+    .then((data)=>{      
+      setAllShips(data.results);
     }) 
-    .then((data)=>{
-      this.setState({allShips: data.results})
-    })
     .catch((err)=>{
-      console.log('err !! ', err);
-      
+      console.log('err', err);
     })
-  }
-  render(){
+    return () => {
+      console.log('App useEffect componentDidUnmount()');
+    } 
+  }, []);
+  // componentDidMount(){
+  //   fetch('https://swapi.co/api/starships')
+  //   .then((res)=>{
+  //     return res.json();
+  //   }) 
+  //   .then((data)=>{
+  //     this.setState({allShips: data.results})
+  //   })
+  //   .catch((err)=>{
+  //     console.log('err !! ', err);
+      
+  //   })
+  // }
+   
     return(
       <div className="container">
         <br /> 
         <br /> 
         <div className="App">
         <CharacterList
-          side = {this.state.side}
-          onCharacterSelector = {this.handleCharacterSelector}
-          selectedCharactorId = {this.state.characterId}
+          side = {side}
+          onCharacterSelector = {handleCharacterSelector}
+          selectedCharacterId = {characterId}
         />
         <Character
-          selectedCharactorId = {this.state.characterId}
+          selectedCharacterId = {characterId}
         />
-        <button className="waves-effect waves-light btn-small" onClick={this.handleSide.bind(this, 'light')}> Light Side </button>
-        <button className="waves-effect waves-light btn-small" onClick={this.handleSide.bind(this, 'dark')}> Dark Side </button>
-        <button className="waves-effect waves-light btn-small" onClick={this.handleStarshipSelector.bind(this, 9)}>Starship 9 </button>
+        <button className="waves-effect waves-light btn-small" onClick={handleSide.bind(this, 'light')}> Light Side </button>
+        <button className="waves-effect waves-light btn-small" onClick={handleSide.bind(this, 'dark')}> Dark Side </button>
+        <button className="waves-effect waves-light btn-small" onClick={handleStarshipSelector.bind(this, 9)}>Starship 9 </button>
 
         {/* <StarshipGrid
-            ships= {this.state.allShips}>
+            ships= {allShips}>
         </StarshipGrid> */}
         </div>
        </div>
     );
-  }
+ 
 }
  
 
