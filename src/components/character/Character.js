@@ -12,10 +12,18 @@ const Character = (props) => {
     // }, []);
 
     useEffect(()=>{
-      fectData();    
-    }, [selectedCharacterId])
+      fetchData();    
+      return () => {
+        console.log(' componentWillUnmount - dependent on the dependecy');        
+      };
+    }, [selectedCharacterId]); // componentDidUpdate
 
-    const fectData = () => {
+    useEffect(()=>{
+      return () => {
+        console.log(' componentWillUnmount');        
+      };
+    }, [])
+    const fetchData = () => {
       fetch('https://swapi.co/api/people/'+ selectedCharacterId)
       .then((res)=>{
         return res.json();
