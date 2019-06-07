@@ -6,10 +6,7 @@ const Character = (props) => {
     const [loadedCharacter, setLoadedCharacter] = useState({});
     const [isLoading, setIsLoading] = useState(false);
     const {selectedCharacterId} = props
-
-    // useEffect(()=>{
-    //   fectData();    
-    // }, []);
+ 
 
     useEffect(()=>{
       fetchData();    
@@ -121,9 +118,7 @@ const Character = (props) => {
             content = <p> Failed to fetch Character</p>
         }
 
-        return content;
- 
+        return content; 
 }
- 
-
+  
 export default Character;
